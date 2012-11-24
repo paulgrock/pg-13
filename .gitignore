@@ -22,14 +22,6 @@ nbproject
 *.sublime-project
 *.sublime-workspace
 
-# Dreamweaver added files
-_notes
-dwsync.xml
-
-# Komodo
-*.komodoproject
-.komodotools
-
 # Folders to ignore
 .hg
 .svn
@@ -37,6 +29,7 @@ dwsync.xml
 intermediate
 publish
 .idea
+node_modules
 
 # build script local files
 build/buildinfo.properties
