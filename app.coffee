@@ -8,16 +8,20 @@ routes = require './routes'
 http = require 'http'
 path = require 'path'
 sio = require 'socket.io'
+config = require './config'
 redis = require 'redis'
 RedisStore = require('socket.io/lib/stores/redis')
 
-pub = redis.createClient()
-sub = redis.createClient()
-db = redis.createClient()
+pub = redis.createClient(config.redis.port, config.redis.host)
+sub = redis.createClient(config.redis.port, config.redis.host)
+db = redis.createClient(config.redis.port, config.redis.host)
 
 `app = express()`
 server = http.createServer app
 io = sio.listen server
+
+db.on "connect", ->
+  console.log "connected"
 
 io.configure ()->
   io.enable 'browser client minification'  # send minified client
@@ -30,7 +34,6 @@ io.configure ()->
     redisClient: db
 
 app.configure ->
-  app.set 'port', process.env.PORT || 3000
   app.set 'views', __dirname + '/views'
   app.set 'view engine', 'jade'
   app.use express.favicon()
@@ -42,6 +45,12 @@ app.configure ->
 
 
 app.configure 'development', ->
+  app.set 'port', process.env.PORT || 3000
+  app.use express.errorHandler()
+
+
+app.configure 'production', ->
+  app.set 'port', process.env.PORT || 80
   app.use express.errorHandler()
 
 
