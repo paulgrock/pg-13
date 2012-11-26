@@ -1,0 +1,308 @@
+@import "normalize", "bourbon/bourbon", "variables"
+
+@mixin linear-gradient-fallback 
+  background-image: -ms-linear-gradient(top left, #000 0%, $siteBg-blue 40%, $siteBg-blue 60%, #000) /* IE10 */
+  background-image:  -o-linear-gradient(225deg, #000 0%, $siteBg-blue 40%, $siteBg-blue 60%, #000) /* Opera 11.10+ */
+
+@mixin header-gradient
+  @include radial-gradient(0% 0%, #f1f1f1, #e6e6e6)
+
+
+*
+  @include box-sizing(border-box)
+
+body
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
+  background-color: #0f3c75
+  @include background-image( radial-gradient(50% 50%, rgba(0, 107, 189, 0.9) 50%, black), url(/images/bg.png) )  
+
+a
+  color: #00B7FF
+
+img
+  max-width: 100%
+
+.container 
+  width: $container-width
+  margin: 0 auto
+  position: relative
+  height: 100%
+  background: black url('/images/milky_way_low.jpg') center center no-repeat
+  -webkit-perspective: 1000
+  @include transition(all, 500ms)
+
+header 
+  height: $chromeHeight
+  background: #e6e6e6
+  background: black
+  hgroup 
+    @include box-sizing(border-box)
+    float: left
+    @include header-gradient
+    color: #999
+    text-transform: uppercase
+    border: $mainBorder
+    width: 40%
+    height: 100%
+    padding-top: 3em
+    text-align: center
+    span 
+      font-weight: bold
+    
+    h1, h2
+      font-size: 1em
+      line-height: 1.5
+      margin: 0
+    h1
+      @include inline-block
+      border-bottom: 1px solid black
+    
+  > div
+    width: 60%
+    float: right
+    height: 100%
+    div 
+      border-top: $mainBorder
+      border-right: $mainBorder
+
+      @include header-gradient
+      float: left
+      height: 50%
+      width: 85%
+    
+  
+  div:empty 
+    width: 15%
+  
+  [role='navigation'] 
+    height: 50%
+    ul 
+      height: 100%
+      padding: 0
+      margin: 0
+      li 
+        height: 100%
+        border: $mainBorder
+        border-left-width: 0
+        float: left
+        width: 25%
+        margin: 0
+        list-style: none
+        @include box-sizing(border-box)
+        a 
+          @include box-sizing(border-box)
+          line-height: 100%
+          display: block
+          padding-top: 20%
+          text-align: center
+          height: 100%
+          color: black
+          @include header-gradient
+          &.active 
+            @include radial-gradient(0% 0%, #3674ab, #366ea6, $deprecated-pos2: top left)
+            color: white
+          
+          &:hover 
+            background-image: -ms-linear-gradient(top right, #000 0%, $siteBg-blue 40%, $siteBg-blue 60%, #000) /* IE10 */
+            background-image:  -o-linear-gradient(135deg, #e6e6e6 0%, $siteBg-blue 40%, $siteBg-blue 60%, #e6e6e6) /* Opera 11.10+ */
+            @include radial-gradient(0% 0%, #3674ab, black, $deprecated-pos2: top left)
+            color: white
+header
+  table    
+    float: right 
+table 
+  width: 35%
+  height: 103%
+  tbody 
+    height: 100%
+    tr   
+      height: 25%
+      td 
+        border: $mainBorder
+        width: 25%
+      
+      td:nth-of-type(4) 
+        border-right: none
+      
+    
+    tr:first-child td 
+      border-top: none
+    
+    tr:nth-last-of-type(1) td 
+      border-bottom: none
+    
+  
+
+table.four-square 
+  width: 15%
+  height: 105%
+  tr   
+    height: 50%
+  
+
+.csstransforms.no-csstransforms3d 
+  #container 
+    overflow: hidden
+    background-color: silver
+  
+  .index 
+    .main 
+      left: 0
+  
+  .skills 
+    .main 
+      left: -100%
+  
+  .about 
+    .main 
+      left: -200%
+  
+  .contact 
+    .main 
+      left: -300%
+  
+  .main 
+    @include transition( left 500ms )
+    section 
+      left: 0
+      position: absolute
+    
+    #main 
+      z-index: 2
+    
+    #skills 
+      left: 100%
+    
+    #about 
+      left: 200%
+    
+    #contact 
+      left: 300%
+    
+  
+
+.csstransforms3d 
+  #skills, #about, #contact 
+    margin-left: -100%
+  
+  .index .main 
+    @include transform( rotateY(-90deg) translateX(-50%) rotateY(90deg) )
+  
+  .skills .main 
+    @include transform( rotateY(-90deg) translateX(-50%) )
+  
+  .about .main
+    @include transform( rotateY(-90deg) translateX(-50%) rotateY(-90deg) )
+  
+  .contact .main 
+    @include transform( rotateY(90deg) translateX(50%) )
+  
+  .main 
+    -webkit-transform-style: preserve-3d
+    -moz-transform-style: preserve-3d
+    -ms-transform-style: preserve-3d
+    -o-transform-style: preserve-3d
+    transform-style: preserve-3d
+    @include transition( transform 500ms )
+    @include transform( rotateY(-90deg) translateX(-50%) rotateY(90deg) )
+    
+    > section 
+      &:nth-of-type(1)
+        //showcase
+        @include transform( rotateY(90deg) translateX(-50%) rotateY(-90deg) )
+      
+      &:nth-of-type(2)
+        //skills
+        @include transform( translateX(50%) rotateY(90deg) )
+      
+      &:nth-of-type(3)
+        //about
+        @include transform( rotateY(90deg) translateX(50%) rotateY(90deg) )
+       
+      &:nth-of-type(4)
+        //contact
+        @include transform( translateX(-50%) rotateY(-90deg) )
+    
+  
+
+.main 
+  @include radial-gradient($siteBg-blue, #000)
+  position: relative
+  @include clearfix
+  > section
+    padding: 20px
+    float: left
+    @include box-sizing(border-box)
+    top: 0
+    left: 0
+    height: 100%
+    width: 100%
+    @include radial-gradient($siteBg-blue, #000)
+   
+  &.index 
+    #index 
+      z-index: 5
+    
+  
+  &.skills 
+    #skills 
+      z-index: 5
+    
+  
+  &.about 
+    #about 
+      z-index: 5
+    
+  
+  &.contact 
+    #contact 
+      z-index: 5
+    
+  
+
+.no-csstransforms 
+  .main 
+    > section 
+      position: absolute
+    
+  
+
+#contact 
+  form 
+    dd 
+      padding-bottom: 1%
+    
+    .button 
+      background: #01558e
+      @include border-radius(5px)
+      text-align: center
+      color: #ededed
+      @include box-shadow( inset 2px 2px 2px rgba(255, 255, 255, .5), inset -2px -2px 2px rgba(255, 255, 255, .5) )
+      @include background-image( linear-gradient(#011624, #01558e) )
+      padding: 5px 10px
+      text-decoration: none
+      @include transition( all 300ms linear )
+      &:hover 
+        @include box-shadow( none )
+      
+    
+  
+
+footer 
+  background: #e6e6e6
+  color: #adadad
+  @include box-sizing(border-box)
+  font-size: .6em
+  height: $chromeHeight/4
+  border: $mainBorder
+  position: absolute
+  bottom: 0
+  left: 0
+  right: 0
+  p 
+    float: left
+    height: 100%
+    width: 40%
+    margin: 0
+
+@import "tablet", "desktop", "tv"

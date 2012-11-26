@@ -1,0 +1,35 @@
+extends layout
+
+block content
+  section#main
+  section#showcase
+  section#skills
+  section#about
+  section#contact
+    form( method="post", action="" )
+      dl
+        dt
+          label( for="name" ) Name
+        
+        dd
+          input#name( type="text", name="name", placeholder="Your Name" )
+        
+        dt
+          label( for="email" ) Email
+        
+        dd
+          input#email( type="email", name="email", placeholder="you@example.com" )
+        
+        dt
+          label( for="subject" ) Subject
+        
+        dd
+          input#subject( type="text", name="subject", placeholder="I've got a question" )
+        
+        dt
+          label( for="message" ) Message
+        
+        dd
+          textarea#message( name="message", placeholder="Message time." )
+        
+        a#submit( href="#" class="button" ) Submit
